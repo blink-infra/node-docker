@@ -1,5 +1,6 @@
 FROM node:alpine
-RUN apk add --no-cache aws-cli bash build-base curl coreutils jq python2
+RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN apk add --no-cache aws-cli@testing bash build-base curl coreutils jq python2
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ENV NVM_DIR="/home/node/.nvm"
 RUN mv /root/.nvm $NVM_DIR && chown -R node:node $NVM_DIR
