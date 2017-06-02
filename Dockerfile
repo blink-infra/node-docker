@@ -1,5 +1,5 @@
 FROM node:alpine
-RUN apk add --no-cache bash build-base curl coreutils
+RUN apk add --no-cache bash build-base curl coreutils python2
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ENV NVM_DIR="/home/node/.nvm"
 RUN mv /root/.nvm $NVM_DIR && chown -R node:node $NVM_DIR
