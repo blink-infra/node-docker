@@ -2,6 +2,7 @@ FROM node
 RUN apt-get update && \
     apt-get install -y \
     --no-install-recommends \
+    awscli \
     jq \
     && rm -rf /var/lib/apt/lists/*
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
