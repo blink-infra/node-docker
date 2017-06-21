@@ -2,9 +2,10 @@ FROM node
 RUN apt-get update && \
     apt-get install -y \
     --no-install-recommends \
-    awscli \
+    python3-pip \
     jq \
     && rm -rf /var/lib/apt/lists/*
+RUN pip3 install awscli
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ENV NVM_DIR="/home/node/.nvm"
 RUN mv /root/.nvm $NVM_DIR && chown -R node:node $NVM_DIR
