@@ -9,6 +9,8 @@ RUN apt-get update && \
     python3-pip \
     jq \
     unzip \
+    ocaml \
+    libelf-dev \
     && rm -rf /var/lib/apt/lists/*
 RUN pip3 install awscli
 
