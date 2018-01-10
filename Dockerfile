@@ -12,8 +12,16 @@ RUN apt-get update && \
     unzip \
     ocaml \
     libelf-dev \
+    locales \
     && rm -rf /var/lib/apt/lists/*
 RUN pip3 install awscli
+
+# Set locale
+RUN locale-gen --no-purge en_GB.UTF-8 && \
+    update-locale LANG=en_GB.UTF-8
+RUN echo locales locales/locales_to_be_generated multiselect en_GB.UTF-8 UTF-8 | debconf-set-selections
+RUN echo locales locales/default_environment_locale select en_GB.UTF-8 | debconf-set-selections
+RUN dpkg-reconfigure locales
 
 # Install nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
