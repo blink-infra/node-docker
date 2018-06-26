@@ -21,11 +21,13 @@ RUN sed -i 's/^# *\(en_GB.UTF-8\)/\1/' /etc/locale.gen && locale-gen
 ENV LANG=en_GB.UTF-8
 
 # Install nvm
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+USER node
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 ENV NVM_DIR="/home/node/.nvm"
-RUN mv /root/.nvm $NVM_DIR && chown -R node:node $NVM_DIR
 
-# Wrap nvm into a script
+USER root
+
+#Wrap nvm into a script
 RUN /bin/echo -e '#! /bin/bash\n\
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"\n\
 nvm $@'\
