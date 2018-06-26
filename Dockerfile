@@ -1,4 +1,4 @@
-FROM node:9
+FROM node
 
 # Install packages needed for deployment
 RUN apt-get update && \
