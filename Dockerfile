@@ -25,14 +25,10 @@ USER node
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 ENV NVM_DIR="/home/node/.nvm"
 
+# Set up nvm environment
 USER root
-
-#Wrap nvm into a script
-RUN /bin/echo -e '#! /bin/bash\n\
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"\n\
-nvm $@'\
->> /bin/nvm
-RUN chmod 0755 /bin/nvm
+COPY bash_profile /home/node/.bash_profile
+RUN chown node:node /home/node/.bash_profile
 
 # Install Docker (for remote builds)
 RUN set -x &&\
